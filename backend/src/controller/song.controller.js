@@ -1,83 +1,46 @@
-import { Song } from "../models/song.model.js";
+import { SongService } from "../services/songService.js";
 
-export const getAllSongs = async (req, res) => {
+const songService = new SongService();
+
+export const getAllSongs = async (req, res, next) => {
   try {
-    // - 1 is descending order => new to old
-    // 1 is ascending order => old to new
-    const song = await Song.find().sort({ createdAt: -1 });
+    const songs = await songService.getAllSongs();
     return res
-      .status(201)
-      .json({ songs: song, message: "All Songs Fetch", success: true });
+      .status(200)
+      .json({ songs, message: "All Songs Fetched", success: true });
   } catch (error) {
     next(error);
   }
 };
 
-// TODO: Will be adding algorithm based on User we will be implementing later
-export const getFeaturedSongs = async (req, res) => {
+export const getFeaturedSongs = async (req, res, next) => {
   try {
-    // fetch 6 random songs using mongoDB aggregate
-    const songs = await Song.aggregate([
-      { $sample: { size: 6 } },
-      {
-        $project: {
-          _id: 1,
-          title: 1,
-          artist: 1,
-          imageUrl: 1,
-          audioUrl: 1,
-        },
-      },
-    ]);
+    const songs = await songService.getFeaturedSongs();
     return res
-      .status(201)
-      .json({ songs, message: "Features Songs Fetch", success: true });
+      .status(200)
+      .json({ songs, message: "Featured Songs Fetched", success: true });
   } catch (error) {
     next(error);
   }
 };
 
-export const getMadeForYouSongs = async (req, res) => {
+export const getMadeForYouSongs = async (req, res, next) => {
   try {
-    // fetch 6 random songs using mongoDB aggregate
-    const songs = await Song.aggregate([
-      { $sample: { size: 6 } },
-      {
-        $project: {
-          _id: 1,
-          title: 1,
-          artist: 1,
-          imageUrl: 1,
-          audioUrl: 1,
-        },
-      },
-    ]);
+    const songs = await songService.getMadeForYouSongs();
     return res
-      .status(201)
-      .json({ songs, message: "Created For You Songs Fetch", success: true });
+      .status(200)
+      .json({ songs, message: "Created For You Songs Fetched", success: true });
   } catch (error) {
     next(error);
   }
 };
 
-export const getTrendingSongs = async (req, res) => {
+export const getTrendingSongs = async (req, res, next) => {
   try {
-    // fetch 6 random songs using mongoDB aggregate
-    const songs = await Song.aggregate([
-      { $sample: { size: 6 } },
-      {
-        $project: {
-          _id: 1,
-          title: 1,
-          artist: 1,
-          imageUrl: 1,
-          audioUrl: 1,
-        },
-      },
-    ]);
+    const songs = await songService.getTrendingSongs();
     return res
-      .status(201)
-      .json({ songs, message: "Trending Songs Fetch", success: true });
+      .status(200)
+      .json({ songs, message: "Trending Songs Fetched", success: true });
   } catch (error) {
     next(error);
   }

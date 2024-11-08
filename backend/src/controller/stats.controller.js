@@ -1,35 +1,18 @@
-import { Song } from "../models/song.model.js";
-import { Album } from "../models/album.model.js";
-import { User } from "../models/user.model.js";
+import { StatsService } from "../services/statsService.js";
+
+const statsService = new StatsService();
 
 export const getStats = async (req, res, next) => {
   try {
-    const [totalSongs, totalUsers, totalAlbums] = await Promise.all([
-      Song.countDocuments(),
-      User.countDocuments(),
-      Album.countDocuments(),
+    const stats = await statsService.getSystemStats();
 
-      Song.aggregate([
-        {
-          $unionWith: { coll: "albums", pipeline: [] },
-        },
-        {
-          $group: {
-            _id: "$artist",
-          },
-        },
-        {
-          $count: "count",
-        },
-      ]),
-    ]);
-    res.status(201).json({
-      totalAlbums,
-      totalSongs,
-      totalUsers,
-      totalArtists: uniqueArtists[0]?.count || 0,
+    res.status(200).json({
+      ...stats,
+      success: true,
+      message: "System statistics fetched successfully",
     });
   } catch (error) {
+    console.error("Error in getStats controller:", error);
     next(error);
   }
 };
