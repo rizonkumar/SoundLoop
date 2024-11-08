@@ -4,7 +4,7 @@ const messageSchema = new mongoose.Schema(
   {
     senderId: {
       // Clerk user ID
-      typeof: String,
+      type: String,
       required: true,
     },
     receiverId: {
