@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const songSchema = new mongoose.Schema(
   {
     title: {
-      typeof: String,
+      type: String,
       required: true,
     },
     artist: {
@@ -31,4 +31,4 @@ const songSchema = new mongoose.Schema(
   { timestamps: true } // this add createdAt, updatedAt
 );
 
-export const User = mongoose.model("Song", songSchema);
+export const Song = mongoose.model("Song", songSchema);

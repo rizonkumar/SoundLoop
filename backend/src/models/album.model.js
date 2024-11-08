@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const albumSchema = new mongoose.Schema(
   {
     title: {
-      typeof: String,
+      type: String,
       required: true,
     },
     artist: {
@@ -23,4 +23,4 @@ const albumSchema = new mongoose.Schema(
   { timestamps: true } // this add createdAt, updatedAt
 );
 
-export const User = mongoose.model("Album", albumSchema);
+export const Album = mongoose.model("Album", albumSchema);
