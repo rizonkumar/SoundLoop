@@ -1,3 +1,3 @@
-export const getAdmin = (req, res) => {
-  res.send("Admin Page");
+export const createSong = (req, res) => {
+  res.send("Create Song Page");
 };
