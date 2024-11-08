@@ -15,7 +15,7 @@ export const authCallBack = async (req, res) => {
       });
     }
     res
-      .status(200)
+      .status(201)
       .json({ message: "User authenticated successfully", success: true });
   } catch (error) {
     res.status(500).json({
