@@ -23,9 +23,11 @@ export const getAlbumById = async (req, res, next) => {
         success: false,
       });
     }
-    res
-      .status(201)
-      .json(album, { message: "Album fetched successfully", success: true });
+    res.status(201).json({
+      message: "Album fetched successfully",
+      success: true,
+      data: album,
+    });
   } catch (error) {
     next(error);
   }
