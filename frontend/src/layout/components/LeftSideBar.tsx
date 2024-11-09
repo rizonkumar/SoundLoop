@@ -65,7 +65,7 @@ const LeftSideBar = () => {
             ) : (
               albums?.map((album, index) => (
                 <Link
-                  to={`/playlist/${album.id}`}
+                  to={`/album/${album._id}`}
                   key={album._id || index}
                   className="group flex cursor-pointer items-center gap-3 rounded-md p-2 hover:bg-zinc-800"
                 >
