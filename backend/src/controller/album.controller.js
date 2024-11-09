@@ -2,9 +2,10 @@ import { Album } from "../models/album.model.js";
 export const getAllAlbums = async (req, res, next) => {
   try {
     const albums = await Album.find();
-    res.status(200).json(albums, {
+    return res.status(200).json({
       message: "All albums fetched successfully",
       success: true,
+      data: albums,
     });
   } catch (error) {
     next(error);

@@ -3,6 +3,7 @@ import { LayoutDashboardIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons";
 
+console.log("2");
 export const TopBar = () => {
   const isAdmin = false;
 
